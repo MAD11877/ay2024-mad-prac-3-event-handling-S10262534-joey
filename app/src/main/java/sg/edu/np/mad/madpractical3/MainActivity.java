@@ -1,6 +1,11 @@
 package sg.edu.np.mad.madpractical3;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +25,37 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Initialize a new User object
+        User user = new User("John Doe", "MAD Developer",1, false);
+
+        // Get the TextViews an Button from the layout
+        TextView tvName = findViewById(R.id.tvName);
+        TextView tvDescription = findViewById(R.id.tvDescription);
+        Button btnFollow = findViewById(R.id.btnFollow);
+
+        // Set the TextView with the User's name, description and default button message
+        tvName.setText(user.name);
+        tvDescription.setText(user.description);
+        btnFollow.setText("Follow");
+
+        btnFollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String btn  = btnFollow.getText().toString();
+                if (btn.equals("Follow")) {
+                    Toast.makeText(MainActivity.this, "Followed", Toast.LENGTH_SHORT).show();
+                    btnFollow.setText("Unfollow");
+
+                } else {
+                    Toast.makeText(MainActivity.this, "Unfollowed", Toast.LENGTH_SHORT).show();
+                    btnFollow.setText("Follow");
+                }
+            }
+        });
+
+
+
+
     }
 }
